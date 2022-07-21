@@ -1,10 +1,7 @@
 #include "random.hpp"
 
-Random::Random(int a, int b)
+Random::Random(int maxVal, int numPts)
 {
-    maxVal = a;
-    numPts = b;
-
     srand(time(NULL));
     while (set.size() != numPts)
     {
