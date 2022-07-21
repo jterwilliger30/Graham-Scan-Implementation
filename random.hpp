@@ -12,13 +12,10 @@
 class Random
 {
 private:
-    int maxVal;
-    int numPts;
-
     void generatePair(std::set<std::pair<int, int>>* V, int max);
 
 public:
-    Random(int, int);
+    Random(int maxVal, int numPts);
 
     std::set<std::pair<int, int>> set;
 

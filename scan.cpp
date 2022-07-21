@@ -1,12 +1,15 @@
 #include "scan.hpp"
 
+// Used psuedocode from wikipedia!
+
+// Constructor for scan which uses the 
 Scan::Scan(std::set<std::pair<int, int>> st)
 {
     std::copy(st.begin(), st.end(), std::back_inserter(pairs));
 
     P0 = find_P0(pairs);
 
-    for (auto i : pairs)
+    for (std::pair<int, int> i : pairs)
     {
         if (i != P0)
         {
@@ -33,7 +36,6 @@ std::pair<int, int> Scan::find_P0(std::vector<std::pair<int, int>> vect)
         }
     }
 
-    // hello
     // Finds pair with lowest X coordinate
     for (int i=0; i < vect.size(); i++)
     {

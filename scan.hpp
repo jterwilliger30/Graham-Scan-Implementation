@@ -17,9 +17,6 @@
 class Scan
 {
 private:
-public:
-    Scan(std::set<std::pair<int, int>>);
-
     std::vector<std::pair<int, int>> pairs;
     std::vector<std::pair<double, std::pair<int, int> >> pointsWithDuplicates;
     std::vector<std::pair<double, std::pair<int, int> >> points;
@@ -27,6 +24,9 @@ public:
     std::stack<std::pair<int, int>> hullPoints;
 
     std::pair<int, int> P0;
+
+public:
+    Scan(std::set<std::pair<int, int>>);
 
     std::pair<int, int> find_P0(std::vector<std::pair<int, int>>);
 
