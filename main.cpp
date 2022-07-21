@@ -19,10 +19,15 @@ void writeDOT(std::vector<std::string> scs, std::vector<std::string> psbl, std::
         bool red = false;
         for (int j = 0; j < unscsN.size(); j++) {
             if (psbl[i] == unscsN[j]) {
-                out << "\t" + std::to_string(i) + " [shape = \"circle\", label =\"" + psbl[i] + "\", color = \"red\"]";
-                out << std::endl;
+                out << "\t" + std::to_string(i) + " [shape = \"circle\", label =\"" + psbl[i] + "\", color = \"red\"]" << std::endl;
                 //out << "\t" + std::to_string(success) + " -> " + std::to_string(i) << std::endl;
                 red = true;
+                if (unscs[i + 1] == unscs[i]) { //Parent is last successful
+                    out << "\t" + std::to_string(last) + " -> " + std::to_string(i) + ";" << std::endl;
+                }
+                else { //Parent is i - 1
+                    out << "\t" + std::to_string(i - 1) + " -> " + std::to_string(i) + ";" << std::endl;
+                }
             }
         }
         if (red == false) {
@@ -56,19 +61,6 @@ int main()
     std::vector<std::string> psblSteps = scn.possibleSteps;
     std::vector<std::string> uncsSteps = scn.unsuccessfulSteps;
     std::vector<std::string> scsSteps = scn.successfulSteps;
-
-
-    std::cout << "All Points" << std::endl;
-    for (int i = 0; i < psblSteps.size(); i++) {
-        std::cout << psblSteps[i] << std::endl;
-    }
-    std::cout << std::endl;
-
-    std::cout << "Successful Path" << std::endl;
-    for (int i = 0; i < scsSteps.size(); i++) {
-        std::cout << scsSteps[i] << std::endl;
-    }
-    std::cout << std::endl;
 
     std::cout << "Unsuccessful Path" << std::endl;
     for (int i = 0; i < uncsSteps.size(); i++) {
