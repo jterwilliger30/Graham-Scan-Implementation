@@ -5,7 +5,7 @@ Random::Random(int a, int b)
     maxVal = a;
     numPts = b;
 
-    srand(0);
+    srand(time(NULL));
     while (set.size() != numPts)
     {
         generatePair(&set, maxVal);
