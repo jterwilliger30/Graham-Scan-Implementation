@@ -33,7 +33,6 @@ std::pair<int, int> Scan::find_P0(std::vector<std::pair<int, int>> vect)
         }
     }
 
-    // hello
     // Finds pair with lowest X coordinate
     for (int i=0; i < vect.size(); i++)
     {
@@ -42,7 +41,6 @@ std::pair<int, int> Scan::find_P0(std::vector<std::pair<int, int>> vect)
             temp = vect[i];
         }
     }
-
     return temp;
 }
 
@@ -108,16 +106,29 @@ void Scan::grahamScan()
     std::vector<std::pair<int, int>> pts;
     for (auto i : points)
     {
+        std::string str = "(" + std::to_string(i.second.first) + "," + std::to_string(i.second.second) + ")";
+        possibleSteps.push_back(str);
         pts.push_back(i.second);
     }
 
     // Graham's Scan Algorithm
     for (std::pair<int, int> point : pts)
     {
+        bool pushed = false;
         while ((hullPoints.size() > 1) && (rotation(penultimate(), hullPoints.top(), point) <= 0))
         {
+            std::string str = "(" + std::to_string(hullPoints.top().first) + "," + std::to_string(hullPoints.top().second) + ")";
+            unsuccessfulSteps.push_back(str);
+            bool pushed = true;
+            unsuccessfulNodes.push_back(str);
             hullPoints.pop();
         }
+        std::string str = "(" + std::to_string(point.first) + "," + std::to_string(point.second) + ")";
+        if (!pushed) {
+            unsuccessfulSteps.push_back(str);
+
+        }
+
         hullPoints.push(point);
     }
 }
@@ -153,6 +164,8 @@ void Scan::write_info(std::string filename)
     while (!cpy.empty())
     {
         file << "(" << cpy.top().first << ", " << cpy.top().second << ")" << std::endl;
+        std::string str = "(" + std::to_string(cpy.top().first) + "," + std::to_string(cpy.top().second) + ")";
+        successfulSteps.push_back(str);
         cpy.pop();
     }
     file.close();
