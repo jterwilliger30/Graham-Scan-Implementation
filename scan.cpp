@@ -174,7 +174,7 @@ std::pair<int, int> Scan::penultimate()
     return cpy.top();
 }
 
-// Print function for debugging...
+// Basic Print function
 void Scan::write_info(std::string filename)
 {
     std::ofstream file;
