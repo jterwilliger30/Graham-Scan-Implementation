@@ -87,39 +87,53 @@ double Scan::distance_P0(std::pair<int, int> P1)
     return sqrt(pow(xLength, 2) + pow(yLength, 2));
 }
 
+// A function that gets rid of points with the same angle, leaving only the furthest one
 void Scan::remove_duplicates()
 {
+    // First make a copy of the original just so we can debug/visualize what is going on
     pointsWithDuplicates = points;
 
+    // Make some temp vectors, one for storing points that have the same angle, and one that will store all of the points with unique angles
     std::vector<std::pair<double, std::pair<int, int>>> pointsTemp;
     std::vector<std::pair<double, std::pair<int, int>>> temp;
 
+    // Go through all the points from top to bottom
     for (int i=pairs.size() - 1; i > 0; i--)
     {
+        // Clear temp as we no longer need any of the points in here.
         temp.clear();
 
-        // Adds first element to temp
+        // Adds first element to temp, starting with its' distance from the origin
         temp.push_back(std::make_pair(distance_P0(points[i].second), points[i].second));
 
+        // Save the angle we are looking for
         double angle = points[i].first;
 
+        // Loop through until we no longer have points with the same angle as the on above
         while (points[i].first == points[i-1].first)
         {
+            // Add the point with the same angle into the temp vector with the distance being first
             temp.push_back(std::make_pair(distance_P0(points[i-1].second), points[i-1].second));
+            // This both accelerates the for loop above, and continues the while loop
             i--;
         }
 
+        // Sort by the distance and flip to make sure the highest distance is the one in the [0] slot
         std::sort(temp.begin(), temp.end());
         std::reverse(temp.begin(), temp.end());
 
+        // Add [0] to the pointsTemp vector to make sure only the longest one stayed
         pointsTemp.push_back(std::make_pair(angle, temp[0].second));
 
     }
+
+    // Add the origin into the pointsTemp, reverse so that the sorting is once again in the correct order, and finallymake points equal to the new pointsTemp
     pointsTemp.push_back(std::make_pair(-1, P0));
     std::reverse(pointsTemp.begin(), pointsTemp.end());
     points = pointsTemp;
 }
 
+// Here is basically the main part of the code
 void Scan::grahamScan()
 {
     // Creates new vector of pairs called "pts", omitting the angle (double) that "points" includes
@@ -129,29 +143,38 @@ void Scan::grahamScan()
         pts.push_back(i.second);
     }
 
-    // Graham's Scan Algorithm
+    // Graham's Scan Algorithm:
+    // Go through all of the points in the new pts
     for (std::pair<int, int> point : pts)
     {
+        // Go through the points for as long as the rotation of the points is negative (clockwise) and hullPoints is not empty (as a failsafe)
         while ((hullPoints.size() > 1) && (rotation(penultimate(), hullPoints.top(), point) <= 0))
         {
+            // If the while loop ends up true, that means that it is rotating in the wrong direction, so get rid of the point you are on
             hullPoints.pop();
         }
+
+        // After that is done, simply push the new point into the mix to try it out
         hullPoints.push(point);
     }
 }
 
+// Small function to find what way the point is rotating
 int Scan::rotation(std::pair<int, int> P1, std::pair<int, int> P2, std::pair<int, int> P3)
 {
     return ((P2.first - P1.first) * (P3.second - P1.second) - (P2.second - P1.second) * (P3.first - P1.first));
 }
 
+// Small function that finds the 2nd poitn from the top
 std::pair<int, int> Scan::penultimate()
 {
+    // Create a copy of hullPoints, pop the top, and return the new top
     std::stack<std::pair<int, int>> cpy = hullPoints;
     cpy.pop();
     return cpy.top();
 }
 
+// Print function for debugging...
 void Scan::write_info(std::string filename)
 {
     std::ofstream file;
