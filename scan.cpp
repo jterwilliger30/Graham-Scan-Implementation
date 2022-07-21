@@ -33,6 +33,7 @@ std::pair<int, int> Scan::find_P0(std::vector<std::pair<int, int>> vect)
         }
     }
 
+    // hello
     // Finds pair with lowest X coordinate
     for (int i=0; i < vect.size(); i++)
     {
