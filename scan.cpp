@@ -2,17 +2,22 @@
 
 // Used psuedocode from wikipedia!
 
-// Constructor for scan which uses the 
+// Constructor for scan which uses the set made form the random class
 Scan::Scan(std::set<std::pair<int, int>> st)
 {
+    // Makes a copy of the set that random made and put it into pairs
     std::copy(st.begin(), st.end(), std::back_inserter(pairs));
 
+    // Finds the starting point for our code
     P0 = find_P0(pairs);
 
+    // Loops through the new vector of pairs and calculates their angle from the start 
     for (std::pair<int, int> i : pairs)
     {
+        // Just a simmple check to have the starting point's angle be -1 (or first in the vector)
         if (i != P0)
         {
+            // We push a new pair into a new vector named points, were they have their angle form origin and their coordinates
             points.push_back(std::make_pair(calculate_angle(P0, i), std::make_pair(i.first, i.second)));
         }
         else
@@ -23,51 +28,62 @@ Scan::Scan(std::set<std::pair<int, int>> st)
     }
 }
 
+// Simple function to find the lowest and then leftmost point
 std::pair<int, int> Scan::find_P0(std::vector<std::pair<int, int>> vect)
 {
+    // Creates a new pair that mimics the first pair in the vector
     std::pair<int, int> temp = vect[0];
 
     // Finds pair with lowest Y coordinate
     for (int i=0; i < vect.size(); i++)
     {
+        // Quick check to find if the temp pair's Y coordinate is higher than the pair we are looking at
         if (temp.second > vect[i].second)
         {
             temp = vect[i];
         }
     }
 
-    // Finds pair with lowest X coordinate
+    // Finds pair with lowest X coordinate amongst the pairs with the lowest Y coordinate
     for (int i=0; i < vect.size(); i++)
     {
+        // Quick check to find if the temp pair's X coordinate is higher than the pair we are looking at while being on the same Y
         if ((temp.first > vect[i].first) && (temp.second == vect[i].second))
         {
             temp = vect[i];
         }
     }
 
+    // Return the newfound origin
     return temp;
 }
 
+// A simple function that calculates the angle from the origin
 double Scan::calculate_angle(std::pair<int, int> P1, std::pair<int, int> P2)
 {
+    // Find the X and Y distance from origin
     double xLength = (P2.first - P1.first);
     double yLength = (P2.second - P1.second);
 
-    // Hacky fix for atan returning -0
+    // Returns the arctan of those 2 distances (Hacky fix for atan returning -0)
     return atan2(yLength, xLength) * (180/M_PI);
-
 }
 
+// Small function that sort whats is given
 void Scan::sort_angles()
 {
+    // Sort seems to work off of the fisrt number in node you give it, so the first number is the angle for each pair
     std::sort(points.begin(), points.end());
 }
 
+// Very similar to calculate_angle execpt it find the distance
 double Scan::distance_P0(std::pair<int, int> P1)
 {
+    // Find the X and Y distance from origin
     double xLength = abs(P1.first - P0.first);
     double yLength = abs(P1.second - P0.second);
 
+    // Returns the a^2 + b^2 = c^2 solution for c
     return sqrt(pow(xLength, 2) + pow(yLength, 2));
 }
 
