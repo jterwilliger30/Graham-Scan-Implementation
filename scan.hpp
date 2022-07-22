@@ -17,6 +17,7 @@
 class Scan
 {
 private:
+    
 public:
     Scan(std::set<std::pair<int, int>>);
 
@@ -24,6 +25,7 @@ public:
     std::vector<std::string> unsuccessfulNodes;
     std::vector<std::string> possibleSteps;
     std::vector<std::string> successfulSteps;
+
     std::vector<std::pair<int, int>> pairs;
     std::vector<std::pair<double, std::pair<int, int> >> pointsWithDuplicates;
     std::vector<std::pair<double, std::pair<int, int> >> points;
