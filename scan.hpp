@@ -17,6 +17,15 @@
 class Scan
 {
 private:
+    
+public:
+    Scan(std::set<std::pair<int, int>>);
+
+    std::vector<std::string> unsuccessfulSteps;
+    std::vector<std::string> unsuccessfulNodes;
+    std::vector<std::string> possibleSteps;
+    std::vector<std::string> successfulSteps;
+
     std::vector<std::pair<int, int>> pairs;
     std::vector<std::pair<double, std::pair<int, int> >> pointsWithDuplicates;
     std::vector<std::pair<double, std::pair<int, int> >> points;
@@ -24,9 +33,6 @@ private:
     std::stack<std::pair<int, int>> hullPoints;
 
     std::pair<int, int> P0;
-
-public:
-    Scan(std::set<std::pair<int, int>>);
 
     std::pair<int, int> find_P0(std::vector<std::pair<int, int>>);
 
@@ -38,8 +44,6 @@ public:
 
     void remove_duplicates();
 
-    void printVect(std::vector<std::pair<double, std::pair<int, int>>>);
-
     void grahamScan();
 
     // Positive is counter-clockwise, Negative is clockwise, Zero is co-linear
@@ -48,5 +52,4 @@ public:
     std::pair<int, int> penultimate();
 
     void write_info(std::string);
-
 };
