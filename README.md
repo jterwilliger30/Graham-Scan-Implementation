@@ -20,6 +20,8 @@ How to use:
 - Paste into: https://dreampuf.github.io/GraphvizOnline/#
 - Enjoy c++ selection tree. Red nodes are members of a failing path. While black nodes are nodes on the successful path. 
 
+-------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+
 Possible Errors And How to deal with them:
 
 Integer Overflow error: May have given the program a large maxVal which must be squared. The maximum value that can be squared is: 46340.9500011
