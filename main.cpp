@@ -45,25 +45,35 @@ void writeDOT(std::vector<std::string> scs, std::vector<std::string> psbl, std::
 
 int main(int argc, char* argv[])
 {
+    // If number of command line arguments is not 3, exits program with failure code
     if (argc != 3)
     {
         std::cout << "Incorrect number of CLI arguments!!" << std::endl;
         exit(EXIT_FAILURE);
     }
 
+    // Maximum X and Y coordinate for generated points
     int maxVal = std::stoi(argv[1]);
+
+    // Number of unique points to be generated
     int numPts = std::stoi(argv[2]);
 
+    // Generates a set of "numPts" unique points, with no point having value greater than "maxVal"
     Random randData(maxVal, numPts);
 
+    // Sets up Graham's Scan algorithm on set of points generated above by finding P0 and calculating angles from P0
     Scan scn(randData.set);
 
+    // Sorts points by their angle from P0 (with P0 being first)
     scn.sort_angles();
 
+    // Removes points with the same angle, keeping only the one furthest from P0
     scn.remove_duplicates();
 
+    // Executes the Grahams Scan Algorithm
     scn.grahamScan();
 
+    // Writes all points (including duplicates removed above) and hull points to output.csv
     scn.write_info("./output.csv");
 
     std::vector<std::string> uncsNodes = scn.unsuccessfulNodes;
