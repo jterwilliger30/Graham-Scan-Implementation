@@ -75,6 +75,10 @@ yHull.append(yHull[0])
 # Plots line segments
 for i in range(len(xHull)):
     plt.plot(xHull, yHull, "r", linestyle="-")
+    
+# Labels each point with its coordinates
+for i in range(len(xHull)):
+    plt.annotate("(" + str(xHull[i]) + "," + str(yHull[i]) + ")", (xHull[i], yHull[i]), fontsize=6)
 
 # Saves .png of the scatterplot
 plt.savefig("scatterplot")
