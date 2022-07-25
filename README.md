@@ -36,3 +36,4 @@ Possible Errors And How to deal with them:
 
 - Unique Point Generator Error: numPts cannot be greater than (maxVal + 1)^2. If it is, the program will exit with code EXIT_FAILURE
 - Integer Overflow error: May have given the program a large maxVal which must be squared. The maximum value that can be squared is: 46340.9500011
+- If number of command line arguments does not equal 3, the program will exit with code EXIT_FAILURE
