@@ -62,11 +62,5 @@ int main()
     std::vector<std::string> uncsSteps = scn.unsuccessfulSteps;
     std::vector<std::string> scsSteps = scn.successfulSteps;
 
-    std::cout << "Unsuccessful Path" << std::endl;
-    for (int i = 0; i < uncsSteps.size(); i++) {
-        std::cout << uncsSteps[i] << std::endl;
-    }
-    std::cout << std::endl;
-
     writeDOT(scsSteps, psblSteps, uncsSteps, uncsNodes);
 }
