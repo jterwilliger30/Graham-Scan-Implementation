@@ -4,7 +4,7 @@
 Random::Random(int maxVal, int numPts)
 {
     // Quits prematurely to avoid infinite loop if required number of unique points cannot be generated
-    if (numPts > pow(maxVal,2))
+    if (numPts > pow((maxVal + 1),2))
     {
         std::cout << "Cannot generate unique points: Program exiting. Please increase maxVal or reduce numPts!!" << std::endl;
         exit(EXIT_FAILURE);
