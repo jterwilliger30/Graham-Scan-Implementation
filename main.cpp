@@ -43,9 +43,18 @@ void writeDOT(std::vector<std::string> scs, std::vector<std::string> psbl, std::
     out << "}";
 }
 
-int main()
+int main(int argc, char* argv[])
 {
-    Random randData(200, 30);
+    if (argc != 3)
+    {
+        std::cout << "Incorrect number of CLI arguments!!" << std::endl;
+        exit(EXIT_FAILURE);
+    }
+
+    int maxVal = std::stoi(argv[1]);
+    int numPts = std::stoi(argv[2]);
+
+    Random randData(maxVal, numPts);
 
     Scan scn(randData.set);
 
