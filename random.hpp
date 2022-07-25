@@ -8,6 +8,7 @@
 #include <cstdlib>
 #include <utility>
 #include <set>
+#include <cmath>
 
 class Random
 {
