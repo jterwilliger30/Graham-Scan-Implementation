@@ -183,13 +183,21 @@ int Scan::rotation(std::pair<int, int> P1, std::pair<int, int> P2, std::pair<int
     return ((P2.first - P1.first) * (P3.second - P1.second) - (P2.second - P1.second) * (P3.first - P1.first));
 }
 
-// Small function that finds the 2nd poitn from the top
+// Small function that finds the 2nd point from the top
 std::pair<int, int> Scan::penultimate()
 {
-    // Create a copy of hullPoints, pop the top, and return the new top
-    std::stack<std::pair<int, int>> cpy = hullPoints;
-    cpy.pop();
-    return cpy.top();
+    // Makes copy of top pair, then removes it from the original
+    std::pair<int, int> top = hullPoints.top();
+    hullPoints.pop();
+
+    // Makes a copy of the secondFromTop pair
+    std::pair<int, int> secondFromTop = hullPoints.top();
+
+    // Adds back the top pair that was deleted
+    hullPoints.push(top);
+
+    // Returns the secondFromTop pair
+    return secondFromTop;
 }
 
 // Basic Print function
