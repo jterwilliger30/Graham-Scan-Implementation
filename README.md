@@ -16,8 +16,7 @@ How to use:
 
 RUN GRAHAM'S SCAN ALGORITHM
 - Add all C++ files to a solution (If on Visual Studio)
-- Toggle the two parameters of the randData object, maxVal and numPoints
-- Compile and run scan.cpp, random.cpp, and main.cpp, creating output.csv and dot.txt
+- Compile scan.cpp, random.cpp, and main.cpp, and run the executable with two arguments, maxVal and numPoints, creating output.csv and DOT.txt
 
 VIEW THE DOT SELECTION TREE
 - Open the DOT.txt file.
