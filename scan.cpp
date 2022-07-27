@@ -134,49 +134,6 @@ void Scan::remove_duplicates()
     points = pointsTemp;
 }
 
-// Here is basically the main part of the code
-void Scan::grahamScan()
-{
-    // Creates new vector of pairs called "pts", omitting the angle (double) that "points" includes
-    std::vector<std::pair<int, int>> pts;
-    for (auto i : points)
-    {
-        std::string str = "(" + std::to_string(i.second.first) + "," + std::to_string(i.second.second) + ")";
-        possibleSteps.push_back(str);
-        pts.push_back(i.second);
-    }
-
-    // Graham's Scan Algorithm:
-    // Go through all of the points in the new pts
-    for (std::pair<int, int> point : pts)
-    {
-        bool pushed = false;
-        while ((hullPoints.size() > 1) && (rotation(penultimate(), hullPoints.top(), point) <= 0))
-        {
-            std::string str = "(" + std::to_string(hullPoints.top().first) + "," + std::to_string(hullPoints.top().second) + ")";
-            unsuccessfulSteps.push_back(str);
-            bool pushed = true;
-            unsuccessfulNodes.push_back(str);
-            hullPoints.pop();
-        }
-        std::string str = "(" + std::to_string(point.first) + "," + std::to_string(point.second) + ")";
-        if (!pushed) {
-            unsuccessfulSteps.push_back(str);
-
-        }
-
-        // Go through the points for as long as the rotation of the points is negative (clockwise) and hullPoints is not empty (as a failsafe)
-        while ((hullPoints.size() > 1) && (rotation(penultimate(), hullPoints.top(), point) <= 0))
-        {
-            // If the while loop ends up true, that means that it is rotating in the wrong direction, so get rid of the point you are on
-            hullPoints.pop();
-        }
-
-        // After that is done, simply push the new point into the mix to try it out
-        hullPoints.push(point);
-    }
-}
-
 // Small function to find what way the point is rotating
 int Scan::rotation(std::pair<int, int> P1, std::pair<int, int> P2, std::pair<int, int> P3)
 {
