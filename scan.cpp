@@ -134,7 +134,7 @@ void Scan::remove_duplicates()
     points = pointsTemp;
 }
 
-// Here is basically the main part of the code
+// The execution of the actual Graham Scan algorithm
 void Scan::grahamScan()
 {
     // Creates new vector of pairs called "pts", omitting the angle (double) that "points" includes
