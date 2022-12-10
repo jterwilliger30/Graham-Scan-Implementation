@@ -7,7 +7,7 @@ Summary:
 Possible Errors And How to deal with them:
 
 - Unique Point Generator Error: numPts cannot be greater than (maxVal + 1)^2. If it is, the program will exit with code EXIT_FAILURE
-- Integer Overflow error: maxVal cannot be greater than 46340
+- Integer Overflow error: maxVal cannot be greater than the square root of MAX_INTEGER, give or take one or two.
 
 -------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 
