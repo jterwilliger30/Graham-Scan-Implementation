@@ -1,19 +1,6 @@
-How to use:
+Summary:
 
-RUN GRAHAM'S SCAN ALGORITHM
-- Add all C++ files to a solution (If on Visual Studio)
-- Compile scan.cpp, random.cpp, and main.cpp, and run the executable with two arguments, maxVal and numPoints, creating output.csv and DOT.txt
-
-VIEW THE DOT SELECTION TREE
-- Open the DOT.txt file.
-- Copy All with ctrl+a -> ctrl+c
-- Paste into: https://dreampuf.github.io/GraphvizOnline/#
-- Enjoy c++ selection tree. Red nodes are members of a failing path. While black nodes are nodes on the successful path. 
-
-VIEW THE 2D SCATTERPLOT
-- Install Python and the matplotlib library
-- Run the visualizer.py file, which pulls data from output.csv
-- Open the generated scatterplot.png file, showing the pointcloud and convex hull
+- This repo is an implementation of the Graham Scan convex hull algorithm written in C++ written for a project that has since concluded.
 
 -------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 
